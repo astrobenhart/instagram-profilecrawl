@@ -1,5 +1,6 @@
 """Util functions for the script"""
 import sys
+import csv
 
 
 def get_all_user_names():
@@ -7,6 +8,10 @@ def get_all_user_names():
     usernames = []
     if len(sys.argv) < 2:
         sys.exit('- Please provide at least one username!\n')
-    for username in sys.argv[1:]:
-        usernames.append(username)
+    if str(sys.argv[2]).__contains__('.'):
+        with open(str(sys.argv[2]), newline='') as csvfile:
+            usernames = csv.reader(csvfile, delimiter = ',')
+    else:
+        for username in sys.argv[1:]:
+            usernames.append(username)
     return usernames
